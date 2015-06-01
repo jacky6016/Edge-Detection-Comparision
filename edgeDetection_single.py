@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
 # Creating a numpy array from an image file
 inputImg = misc.imread(inputFile)
-inputArr = misc.imread(outputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
+inputArr = misc.imread(inputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
 
 # Do edge detection(and estimate the time elapsed)
 start_time = time.time()
