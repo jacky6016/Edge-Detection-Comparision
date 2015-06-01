@@ -36,28 +36,28 @@ if __name__ == '__main__':
 	args = parser.parse_args()	
 	inputFile, outputFile = args.input, args.output
 
-# Creating a numpy array from an image file
-inputImg = misc.imread(inputFile)
-inputArr = misc.imread(inputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
+	# Creating a numpy array from an image file
+	inputImg = misc.imread(inputFile)
+	inputArr = misc.imread(inputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
 
-# Do edge detection(and estimate the time elapsed)
-start_time = time.time()
-lx, ly = inputArr.shape
-outputArr = np.zeros((lx, ly))
+	# Do edge detection(and estimate the time elapsed)
+	start_time = time.time()
+	lx, ly = inputArr.shape
+	outputArr = np.zeros((lx, ly))
 
-for i in range(lx):
-	for j in range(ly):
-		outputArr[i, j] = convolution(inputArr, i, j)
-elapsed_time = time.time() - start_time
-print "Elapsed_time:" + str(elapsed_time)
+	for i in range(lx):
+		for j in range(ly):
+			outputArr[i, j] = convolution(inputArr, i, j)
+	elapsed_time = time.time() - start_time
+	print "Elapsed_time:" + str(elapsed_time)
 
-# Display pictures for comparison
-fig = plt.figure()
-ax1 = fig.add_subplot(121)
-ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
-ax2 = fig.add_subplot(122)
-ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
-plt.show()
+	# Display pictures for comparison
+	fig = plt.figure()
+	ax1 = fig.add_subplot(121)
+	ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
+	ax2 = fig.add_subplot(122)
+	ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
+	plt.show()
 
-# Store the result in another picture file
-misc.imsave(outputFile, outputArr)
+	# Store the result in another picture file
+	misc.imsave(outputFile, outputArr)
