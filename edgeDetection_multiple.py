@@ -56,21 +56,19 @@ if __name__ == '__main__':
 	import argparse, sys
 	from os.path import isfile
 	from argparse import ArgumentParser
+	
 	# Program arguments
-#	parser = ArgumentParser(description="Image Edge detection")
-#	parser.add_argument("-i", "--input",
-#		dest="filename", required=True, type=extant_file,
-#		help="input image file", metavar="FILE")
-#	parser.add_argument("-o", "--output",
-#		type=argparse.FileType(mode='w'),
-#		default=sys.stdout, dest="output",
-#		help="file to write output to (default=stdout)")
-#	args = parser.parse_args()	
+	parser = ArgumentParser(description="Image Edge detection")
+	parser.add_argument("-i", "--input", required=True, help="input image file")
+	parser.add_argument("-o", "--output", default="output.png", help="file to write output to")
+	args = parser.parse_args()	
+	inputFile, outputFile = args.input, args.output
 
 	# Creating a numpy array from an image file
-	inputArr = misc.imread('lena.png')
+	inputImg = misc.imread(inputFile)
+	inputArr = misc.imread(inputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
 
-	# Do edge detection
+	# Do edge detection(and estimate the time elapsed)
 	start_time = time.time()
 	lx, ly = inputArr.shape
 	outputArr = np.zeros((lx, ly))
@@ -86,14 +84,15 @@ if __name__ == '__main__':
 
 	outputArr = computation(inputArr, process_count)
 	elapsed_time = time.time() - start_time
-	print "elapsed_time: " + str(elapsed_time)
-	# Display picture
-	plt.imshow(outputArr)
-	plt.show()
-	#plt.imshow(inputArr, cmap=plt.cm.gray)
-
-	plt.imshow(inputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
+	print "Elapsed_time: " + str(elapsed_time)
+	
+	# Display pictures for comparison
+	fig = plt.figure()
+	ax1 = fig.add_subplot(121)
+	ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
+	ax2 = fig.add_subplot(122)
+	ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
 	plt.show()
 
 	# Store the result in another picture file
-	misc.imsave('output.png', outputArr)
+	misc.imsave(outputFile, outputArr)

@@ -24,26 +24,40 @@ def convolution(matrix, x, y):
 	
 	return math.sqrt(ret_x**2 + ret_y**2)
 
-# Creating a numpy array from an image file
-image = misc.imread('lena.png')
+if __name__ == '__main__':
+	import argparse, sys
+	from os.path import isfile
+	from argparse import ArgumentParser
+	
+	# Program arguments
+	parser = ArgumentParser(description="Image Edge detection")
+	parser.add_argument("-i", "--input", required=True, help="input image file")
+	parser.add_argument("-o", "--output", default="output.png", help="file to write output to")
+	args = parser.parse_args()	
+	inputFile, outputFile = args.input, args.output
 
-# Do edge detection
+# Creating a numpy array from an image file
+inputImg = misc.imread(inputFile)
+inputArr = misc.imread(outputFile, flatten = 1) # flattens the color layers into a single gray-scale layer
+
+# Do edge detection(and estimate the time elapsed)
 start_time = time.time()
-lx, ly = image.shape
-output = np.zeros((lx, ly))
+lx, ly = inputArr.shape
+outputArr = np.zeros((lx, ly))
 
 for i in range(lx):
 	for j in range(ly):
-		output[i, j] = convolution(image, i, j)
+		outputArr[i, j] = convolution(inputArr, i, j)
 elapsed_time = time.time() - start_time
-print "elapsed_time:" + str(elapsed_time)
-# Display picture
-plt.imshow(output)
-plt.show()
-#plt.imshow(image, cmap=plt.cm.gray)
+print "Elapsed_time:" + str(elapsed_time)
 
-plt.imshow(image, cmap=plt.cm.gray, vmin=30, vmax=200)
+# Display pictures for comparison
+fig = plt.figure()
+ax1 = fig.add_subplot(121)
+ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
+ax2 = fig.add_subplot(122)
+ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
 plt.show()
 
 # Store the result in another picture file
-misc.imsave('output.png', output)
+misc.imsave(outputFile, outputArr)
