@@ -1,4 +1,8 @@
 # Edge-Detection-Comparision
+###Modules needed to be pre-installed
+* scipy
+* numpy
+
 ###Command Line Execution
 * Single thread version
 
