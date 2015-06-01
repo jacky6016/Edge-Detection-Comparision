@@ -61,8 +61,9 @@ if __name__ == '__main__':
 	parser = ArgumentParser(description="Image Edge detection")
 	parser.add_argument("-i", "--input", required=True, help="input image file")
 	parser.add_argument("-o", "--output", default="output.png", help="file to write output to")
+	parser.add_argument("-t", "--threads", default=multiprocessing.cpu_count()*2, help="file to write output to")
 	args = parser.parse_args()	
-	inputFile, outputFile = args.input, args.output
+	inputFile, outputFile, process_count = args.input, args.output, int(args.threads)
 
 	# Creating a numpy array from an image file
 	inputImg = misc.imread(inputFile)
@@ -74,8 +75,6 @@ if __name__ == '__main__':
 	outputArr = np.zeros((lx, ly))
 
 	# Create & start new threads
-	process_count = multiprocessing.cpu_count()*2
-	
 	# Create shared data among processes 
 	mp_arr = multiprocessing.Array(ctypes.c_int, lx*ly)
 	part = len(inputArr) / process_count
