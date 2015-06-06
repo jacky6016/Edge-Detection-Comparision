@@ -2,6 +2,7 @@
 ###Modules needed to be pre-installed
 * scipy
 * numpy
+* matplotlib
 
 ###Command Line Execution
 * Single thread version
