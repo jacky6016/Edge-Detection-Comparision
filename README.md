@@ -16,3 +16,12 @@
 Output file and thread number is optional.
 
 The default value for them is 'output.png' and multiprocessing.cpu_count()*2.
+
+###Concurrency Performance Evaluation
+* Single thread version
+
+  `python test_single.py  -i [input image file]  -o [output image file] -n [number of repetitive execution]`
+
+* Multiple thread version
+
+  `python test_Multiple.py  -i [input image file]  -o [output image file]  -t [thread number] -n [number of repetitive execution]`
