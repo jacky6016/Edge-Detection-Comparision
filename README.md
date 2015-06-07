@@ -11,7 +11,7 @@
 
 * Multiple thread version
 
-  `python edgeDetection_Multiple.py  -i [input image file]  -o [output image file]  -t [thread number]`
+  `python edgeDetection_multiple.py  -i [input image file]  -o [output image file]  -t [thread number]`
 
 Output file and thread number is optional.
 
@@ -24,4 +24,4 @@ The default value for them is 'output.png' and multiprocessing.cpu_count()*2.
 
 * Multiple thread version
 
-  `python test_Multiple.py  -i [input image file]  -o [output image file]  -t [thread number] -n [number of repetitive execution]`
+  `python test_multiple.py  -i [input image file]  -o [output image file]  -t [thread number] -n [number of repetitive execution]`
