@@ -55,12 +55,12 @@ if __name__ == '__main__':
 	print "Average Elapsed Time:" + str(elapsed_time / testNumber)
 
 	# Display pictures for comparison
-	fig = plt.figure()
-	ax1 = fig.add_subplot(121)
-	ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
-	ax2 = fig.add_subplot(122)
-	ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
-	plt.show()
+#	fig = plt.figure()
+#	ax1 = fig.add_subplot(121)
+#	ax1.imshow(inputImg, cmap=plt.cm.gray, vmin=30, vmax=200)
+#	ax2 = fig.add_subplot(122)
+#	ax2.imshow(outputArr, cmap=plt.cm.gray, vmin=30, vmax=200)
+#	plt.show()
 
 	# Store the result in another picture file
 	misc.imsave(outputFile, outputArr)
